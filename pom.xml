@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Active Home :: API :: Z-Wave</name>
-    <description>An Z-Wave access to Active Home</description>
+    <description>A Z-Wave access to Active Home</description>
     <url>https://active-home.org</url>
 
     <properties>
