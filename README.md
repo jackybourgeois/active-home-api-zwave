@@ -1,3 +1,3 @@
 # activehome-api-zwave
 
-An Z-Wave access to Active Home
+A Z-Wave access to Active Home
