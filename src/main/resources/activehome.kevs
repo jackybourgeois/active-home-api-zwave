@@ -1,0 +1,63 @@
+add ah : JavaNode
+set ah.log = "DEBUG"
+
+add ah.timekeeper : TimeKeeper
+set ah.timekeeper.startDate = ""
+set ah.timekeeper.stopDate = ""
+set ah.timekeeper.zip = "x1"
+
+add ah.ctx : ContextManager
+
+add ah.chart : GoogleChart
+add ah.console : WebConsole
+
+add ah.http : HttpAPI
+set ah.http._address = "192.168.1.193"
+add ah.ws : WsAPI
+set ah.ws._address = "192.168.1.193"
+add ah.zwave : ZwaveAPI
+set ah.zwave._zPort = "/dev/ttyAMA0"
+set ah.zwave._zConfigPath = "/var/opt/config"
+
+
+add chan_timekeeper_tic : AsyncBroadcast
+add chan_ctx_getData : AsyncBroadcast
+add chan_ctx_getRequest : AsyncBroadcast
+add chan_ctx_getResponse : AsyncBroadcast
+add chan_ctx_pushResponse : AsyncBroadcast
+
+add chan_http_pushRequest : AsyncBroadcast
+add chan_http_sendOutside : AsyncBroadcast
+add chan_ws_sendOutside : AsyncBroadcast
+
+bind ah.ctx.getRequest chan_ctx_getRequest
+bind ah.ctx.getResponse chan_ctx_getResponse
+bind ah.ctx.getData chan_ctx_getData
+bind ah.ctx.pushResponse chan_ctx_pushResponse
+
+bind ah.http.pushRequest chan_http_pushRequest
+bind ah.http.sendOutside chan_http_sendOutside
+
+bind ah.ctx.getRequest chan_http_pushRequest
+bind ah.ctx.pushResponse chan_http_sendOutside
+bind ah.ctx.pushDataOutside chan_ws_sendOutside
+bind ah.ws.sendOutside chan_ws_sendOutside
+
+bind ah.console.getRequest chan_http_pushRequest
+bind ah.console.pushResponse chan_http_sendOutside
+
+bind ah.chart.getRequest chan_http_pushRequest
+bind ah.chart.pushResponse chan_http_sendOutside
+
+bind ah.ctx.pushDataToSystem chan_ws_sendOutside
+bind ah.ws.sendOutside chan_ws_sendOutside
+
+bind ah.timekeeper.tic chan_timekeeper_tic
+bind ah.ctx.time chan_timekeeper_tic
+bind ah.zwave.time chan_timekeeper_tic
+
+bind ah.zwave.pushData chan_ctx_getData
+
+add sync : WSGroup
+attach ah sync
+set sync.master = "ah"
