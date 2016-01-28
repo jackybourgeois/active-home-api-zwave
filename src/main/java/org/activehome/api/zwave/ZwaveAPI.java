@@ -1,5 +1,30 @@
 package org.activehome.api.zwave;
 
+/*
+ * #%L
+ * Active Home :: API :: Z-Wave
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2016 org.activehome
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
+
+
 import org.activehome.api.API;
 import org.activehome.com.Request;
 import org.activehome.com.Response;
@@ -16,14 +41,26 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Zwave API - allow the system to receive and send messages
- * through a a Zwave network.
- *
  * @author Jacky Bourgeois
  * @version %I%, %G%
  */
 @ComponentType
 public class ZwaveAPI extends API {
+
+    @Param(defaultValue = "Zwave API - allow the system to receive and send messages through a Zwave network.")
+    private String description;
+
+    @Param(defaultValue = "/activehome-api-zwave/master/docs/zwaveAPI.png")
+    private String img;
+
+    @Param(defaultValue = "/activehome-api-zwave/master/docs/zwaveAPI.md")
+    private String doc;
+
+    @Param(defaultValue = "/activehome-api-zwave/master/docs/demo.kevs")
+    private String demoScript;
+
+    @Param(defaultValue = "/activehome-api-zwave")
+    private String src;
 
     private Manager manager;
     private boolean driverReady = false;
