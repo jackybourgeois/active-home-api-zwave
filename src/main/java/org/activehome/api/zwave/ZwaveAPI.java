@@ -6,7 +6,7 @@ package org.activehome.api.zwave;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2016 org.activehome
+ * Copyright (C) 2016 Active Home Project
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -47,19 +47,9 @@ import java.util.TimerTask;
 @ComponentType
 public class ZwaveAPI extends API {
 
-    @Param(defaultValue = "Zwave API - allow the system to receive and send messages through a Zwave network.")
+    @Param(defaultValue = "Allow the system to receive and send messages through a Zwave network.")
     private String description;
-
-    @Param(defaultValue = "/activehome-api-zwave/master/docs/zwaveAPI.png")
-    private String img;
-
-    @Param(defaultValue = "/activehome-api-zwave/master/docs/zwaveAPI.md")
-    private String doc;
-
-    @Param(defaultValue = "/activehome-api-zwave/master/docs/demo.kevs")
-    private String demoScript;
-
-    @Param(defaultValue = "/activehome-api-zwave")
+    @Param(defaultValue = "/active-home-api-zwave")
     private String src;
 
     private Manager manager;
@@ -177,7 +167,8 @@ public class ZwaveAPI extends API {
             manager.cancelControllerCommand(zwaveCtrlId);
             return "Command canceled.";
         }
-        return new Error(ErrorType.NOT_FOUND, "The communication with the Zwave network is currently unavailable.");
+        return new Error(ErrorType.NOT_FOUND, "The communication with the " +
+                "Zwave network is currently unavailable.");
     }
 
     public Object softReset() {
@@ -185,7 +176,8 @@ public class ZwaveAPI extends API {
             manager.softReset(zwaveCtrlId);
             return "Command soft reset issued.";
         }
-        return new Error(ErrorType.NOT_FOUND, "The communication with the Zwave network is currently unavailable.");
+        return new Error(ErrorType.NOT_FOUND, "The communication with the " +
+                "Zwave network is currently unavailable.");
     }
 
     public Object resetController() {
@@ -193,7 +185,8 @@ public class ZwaveAPI extends API {
             manager.resetController(zwaveCtrlId);
             return "The Zwave network configuration has been reset";
         }
-        return new Error(ErrorType.NOT_FOUND, "The communication with the Zwave network is currently unavailable.");
+        return new Error(ErrorType.NOT_FOUND, "The communication with the " +
+                "Zwave network is currently unavailable.");
     }
 
     public void setZwaveCtrlId(long id) {
@@ -227,7 +220,8 @@ public class ZwaveAPI extends API {
         ComponentProperties cp = new ComponentProperties(compType, id);
         cp.getPortDestinationMap().put("toAPI", new LinkedList<>());
         cp.getPortDestinationMap().get("toAPI").add(getId());
-        Request req = new Request(getId(), "linker", getCurrentTime(), "startComponent", new Object[]{cp});
+        Request req = new Request(getId(), "linker", getCurrentTime(),
+                "startComponent", new Object[]{cp});
         sendRequest(req, null);
     }
 
